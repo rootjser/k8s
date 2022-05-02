@@ -169,6 +169,8 @@ docker run -d \
   -v ~/kuboard-spray-data:/data \
  eipwork/kuboard-spray:latest-amd64
 ```
+> 登录
+在浏览器打开地址 http://这台机器的IP:30000， 输入用户名 admin，默认密码 Kuboard123，即可登录 Kuboard-Spray 界面。
 
 
 
