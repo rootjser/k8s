@@ -77,17 +77,18 @@ hostnamectl set-hostname zy-nph-skg-dev-k8s-master01  && bash
 #关闭防火墙
 systemctl stop firewalld && systemctl disable firewalld
 
-#安装 iptables
+# 以下1-4非必须，一般可跳过
+#1、安装 iptables
 yum install iptables-services -y
 
-#禁用 iptables
+#2、禁用 iptables
 service iptables stop && systemctl disable iptables
 
-#关闭 selinux
+#3、关闭 selinux
 setenforce 0
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 
-#安装基础软件包
+#4、安装基础软件包
 yum install -y wget net-tools nfs-utils lrzsz gcc gcc-c++ make cmake libxml2-devel openssl-devel curl curl-devel unzip sudo ntp libaio-devel wget vim ncurses-devel autoconf automake zlib-devel python-devel epel-release openssh-server socat ipvsadm conntrack yum-utils
 
 #配置 docker-ce 国内 yum 源（阿里云）
