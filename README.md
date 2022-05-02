@@ -12,21 +12,22 @@ https://mirrors.tuna.tsinghua.edu.cn/centos/7.9.2009/isos/x86_64/CentOS-7-x86_64
 
 ## 虚拟机开启网络
 最小化安装的操作系统是没有配置网络的需要开启
-### 1.1 设置获取动态ip地址
+### 方式一：设置获取动态ip地址
+#### 1.1 查看网卡信息
 ```code
 ip a 
 ip a|head
 ```
-### 1.2 修改网卡参数ONBOT=no改为yes
+#### 1.2 修改网卡参数ONBOT=no改为yes
 ifcfg-enp0s3是上面看到的网卡名
 ```code
 sed -i 's|ONBOOT=no|ONBOOT=yes|g' /etc/sysconfig/network-scripts/ifcfg-enp0s3
 ```
-### 1.3 重启网卡服务
+#### 1.3 重启网卡服务
 ```code
 systemctl restart network
 ```
-### 2.1 手动设置静态ip地址
+### 方式二：手动设置静态ip地址
 ```code
 [root@localhost ~]# vi /etc/sysconfig/network-scripts/ifcfg-enp0s3
 TYPE=Ethernet
