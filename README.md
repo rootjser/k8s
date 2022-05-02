@@ -408,7 +408,7 @@ node -v
 > Jenkins配置Node环境
 ```code
 1、系统管理——管理插件——可选插件，搜索NodeJS，选择NodeJS Plugin安装
-2、系统管理 —— 全局工具配置 —— NodeJS - 新增安装 - Install from nodejs.org mirror，选择安装nodejs，选择当前版本 16.15.0，命名node。并选中 自动安装
+2、系统管理 —— 全局工具配置 —— NodeJS - 新增安装 - Install from nodejs.org mirror，选择安装nodejs，选择当前版本 14.16.0，命名node。并选中 自动安装
    镜像地址填 https://npm.taobao.org/mirrors/node/
 3、创建一个 "构建一个自由风格的软件项目"
    在项目的配置页面中: 在构建环境中勾选 Provide Node & npm bin/ folder to PATH ,选中对应的 nodejs 版本
@@ -416,12 +416,13 @@ node -v
 4、系统管理 => 系统配置 => 节点管理,添加这个环境变量
    PATH=$PATH:/var/jenkins_home/tools/jenkins.plugins.nodejs.tools.NodeJSInstallation/node/bin
 ```
-![image](https://user-images.githubusercontent.com/82021554/166230182-713c73cd-1e89-453d-b1ce-0a39ff657e2c.png)
+![image](https://user-images.githubusercontent.com/82021554/166232453-eefdd5a6-ab25-422e-bfd8-fe3af0e0586c.png)
 ![image](https://user-images.githubusercontent.com/82021554/166230907-71903989-5370-46fb-ba3d-89542670318c.png)
 
 
 > 增加gitlabroot凭据
 Dashboard > 凭据 > 系统 > 全局凭据 (unrestricted)
+
 ![image](https://user-images.githubusercontent.com/82021554/166216941-2a4cb17e-49c7-44f2-be2a-de7950a8b114.png)
 
 >
