@@ -221,8 +221,10 @@ cat ~/.kube/config
 
 ## Harbor
 Harbor是由VMWare在Docker Registry的基础之上进行了二次封装，开源的企业级的 Docker Registry 管理项目，加进去了很多额外程序，而且提供了一个非常漂亮的web界面。
+Docker Compose可直接下载 
 > 安装Docker Compose
 Docker Compose安装帮助文档：https://docs.docker.com/compose/install/
+Docker Compose可直接下载 https://github.com/docker/compose/releases/download/1.28.5/docker-compose-linux-x86_64 用ft传
 ```code
 #下载ocker-compose
 curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -381,8 +383,16 @@ Rebuilder
 SonarQube Scanner
 ```
 
+## Pipeline 流水线脚本
+> Jenkins服务器配置Node 16.x环境
+```code
+curl -sL https://rpm.nodesource.com/setup_16.x | bash - yum install nodejs -y
+```
+> 增加gitlabroot凭据
+Dashboard > 凭据 > 系统 > 全局凭据 (unrestricted)
+![image](https://user-images.githubusercontent.com/82021554/166216941-2a4cb17e-49c7-44f2-be2a-de7950a8b114.png)
 
-
+>
 
 
 
