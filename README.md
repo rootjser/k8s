@@ -259,14 +259,14 @@ data_volume: /data/app/harbor-data  #harbor 持久化数据
 运行 ./install.sh
 ```
 ![image](https://user-images.githubusercontent.com/82021554/166200641-8d89e70f-3fa5-41a5-903b-c30d1db34068.png)
+![image](https://user-images.githubusercontent.com/82021554/166201360-c3dcdf7e-4d02-4a58-8ccc-d59a0d773c0c.png)
 
 > 设置Harbor开启启动
 ```code
 # 编写启动脚本
-vim /data/app/harbor/startall.sh
+vi /data/app/harbor/startall.sh
 
 #!/bin/bash
-
 cd /data/app/harbor
 docker-compose stop && docker-compose start
 
