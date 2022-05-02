@@ -427,6 +427,25 @@ Dashboard > 凭据 > 系统 > 全局凭据 (unrestricted)
 
 ![image](https://user-images.githubusercontent.com/82021554/166216941-2a4cb17e-49c7-44f2-be2a-de7950a8b114.png)
 
+> 服务器增加harbor的http支持，因为docker默认用https登录等
+```code
+cat > /etc/docker/daemon.json <<EOF
+拷贝
+{
+"registry-mirrors":[
+"https://registry.docker-cn.com",
+"https://docker.mirrors.ustc.edu.cn",
+"https://dockerhub.azk8s.cn",
+"http://hub-mirror.c.163.com"
+],
+"exec-opts": ["native.cgroupdriver=systemd"],
+"data-root": "/data/docker",
+"insecure-registries":[
+"192.168.1.200:30200"]
+}
+EOF
+```
+
 > 新建流水线任务pipeline脚本
 ```code
 
