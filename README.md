@@ -205,9 +205,73 @@ cat ~/.kube/config
 
 ![image](https://user-images.githubusercontent.com/82021554/166196664-debcb7c4-c481-416c-9bd6-baf780a66093.png)
 
+## Harbor
+Harbor是由VMWare在Docker Registry的基础之上进行了二次封装，开源的企业级的 Docker Registry 管理项目，加进去了很多额外程序，而且提供了一个非常漂亮的web界面。
+> 安装Docker Compose
+Docker Compose安装帮助文档：https://docs.docker.com/compose/install/
+```code
+#下载ocker-compose
+curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 
+#查看下载好的包
+ls /usr/local/bin/
 
+#修改执行权限
+chmod +x /usr/local/bin/docker-compose
 
+#软连接映射到/usr/bin/
+ln -sf  /usr/local/bin/docker-compose /usr/bin/docker-compose
+
+#验证
+which docker-compose
+docker-compose version
+```
+> 安装 Harbor
+```code
+#下载harbor安装包
+wget https://github.com/goharbor/harbor/releases/download/v2.5.0/harbor-online-installer-v2.5.0.tgz
+
+#解压harbor安装包
+tar xf harbor-online-installer-v2.5.0.tgz -C /data/app/
+
+#编辑harbor.yml文件
+cd /data/app/harbor
+cp harbor.yml.tmpl harbor.yml
+
+vim harbor.yml
+hostname:   harbor01.k8s.com   #主机IP/或者域名
+harbor_admin_password: Harbor12345   #harbor UI界面admin登陆密码
+data_volume: /data/app/harbor-data  #harbor 持久化数据
+
+#关闭https（把以下的行都注释掉12-18行）
+# https related config
+#https:
+# # https port for harbor, default is 443
+# port: 443
+# # The path of cert and key files for nginx
+# certificate: /your/certificate/path
+# private_key: /your/private/key/p
+
+# 安装脚本
+运行 ./install.sh
+```
+> 设置Harbor开启启动
+```code
+# 编写启动脚本
+vim /data/app/harbor/startall.sh
+
+#!/bin/bash
+
+cd /data/app/harbor
+docker-compose stop && docker-compose start
+
+# 赋予执行权限
+chmod +x  /data/app/harbor/startall.sh
+
+# 把启动脚本加到系统启动之后最后一个执行的文件
+echo "/bin/bash /data/app/harbor/startall.sh" >>/etc/rc.d/rc.local
+chmod +x /etc/rc.d/rc.local
+```
 
 
 
