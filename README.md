@@ -408,6 +408,7 @@ source /etc/profile
 node -v
 ```
 > Jenkins配置Node环境
+参考 https://www.cnblogs.com/fsong/p/14412692.html
 ```code
 1、系统管理——管理插件——可选插件，搜索NodeJS，选择NodeJS Plugin安装
 2、系统管理 —— 全局工具配置 —— NodeJS - 新增安装 - Install from nodejs.org mirror，选择安装nodejs，选择当前版本 14.16.0，命名node。并选中 自动安装
