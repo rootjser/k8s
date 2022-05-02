@@ -77,71 +77,75 @@ netstat -lnpt 
 ```code
 ps  -ef 
 ```
-### echo  用于字符串的输出
-1.显示命令执行结果
+### echo用于字符串的输出
+```code
+显示命令执行结果
 echo `date`
 注意： 这里使用的是反引号 `, 而不是单引号 '。
-
-1.输出字符串或变量不换行
-echo -n  "kubilai"
-1.read 命令从标准输入中读取一行,并把输入行的每个字段的值指定给 shell 变量
+```
+```code
+输出字符串或变量不换行
+echo -n  "hello world"
+```
+### read 命令从标准输入中读取一行,并把输入行的每个字段的值指定给 shell 变量
+```code
 #!/bin/sh
 read name
 echo "$name It is a test"
-22.
-curl的使用说明
-23.
+```
+### curl的使用说明
 1.curl 是常用的命令行工具，用来请求 Web 服务器。它的名字就是客户端（client）的 URL 工具的意思。
 参考博客：https://www.ruanyifeng.com/blog/2019/09/curl-reference.html
 官方手册：https://curl.se/docs/manpage.html
-
+```code
 1.-s参数将不输出错误和进度信息。
 curl -s http://172.31.24.30:8888/chfs/shared/java/app.info.txt
 1.>将内容重定向到app.info文件
 curl -s http://172.31.24.30:8888/chfs/shared/java/app.info.txt >app.info
 1.>>将内容追加到app.info文件
-curl -s http://172.31.24.30:8888/chfs/shared/java/app.info.txt >app.info
-24.
-jq工具的使用说明
-25.
+curl -s http://172.31.24.30:8888/chfs/shared/java/app.info.txt >>app.info
+```
+### jq工具的使用说明
 1.简介
 jq 是一款命令行下处理 JSON 数据的工具。其可以接受标准输入，命令管道或者文件中的 JSON 数据，经过一系列的过滤器(filters)和表达式的转后形成我们需要的数据结构并将结果输出到标准输出中。jq 的这种特性使我们可以很容易地在 Shell 脚本中调用它。
 参考博客：https://www.linuxidc.com/Linux/2017-10/148037.htm
 官方手册：https://stedolan.github.io/jq/tutorial/
 1.centos7系统下载jq
-# 添加epel源
+```code
+1.添加epel源
 wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 rpm -ivh epel-release-latest-7.noarch.rpm
 yum repolist
 yum -y install jq
 1.-r参数返回标准输出
 curl -s http://172.31.24.30:8888/chfs/shared/java/app.info.txt | /usr/bin/jq  -r ".info.kkcloud_snowflake[0].git"
-26.
-sed命令的使用说明
-27.
+```
+### sed命令的使用说明
 1.简介
 Sed表示流编辑器(Stream Editor)的缩写。这是一个简单但功能强大的工具，分析文本，并无缝地转换它。 SED是在1973-1974年由贝尔实验室的李E. McMahon开发。如今，它运行在所有主要的操作系统。
 参考博客：https://www.yiibai.com/sed
+```code
 1.-n参数读取指定的行
 sed  -n  '2p'  app.info   #读取第二行
 1.-i参数和s命令与g命令一起使用全局替换字符串
 sed -i  "s|parameter01|$app|g" start.sh   # 变量$app全局替换parameter01
-28.
-wget命令的使用说明
-29.
+```
+### wget命令的使用说明
 1.简介
 是Linux系统用于从Web下载文件的命令行工具，支持 HTTP、HTTPS及FTP协议下载文件，而且wget还提供了很多选项，例如下载多个文件、后台下载，使用代理等等，使用非常方便。
 参考博客:https://juejin.cn/post/7026184288198459406
+```code
 1.-q参数,安静模式 (无信息输出)。
 wget  -q  http://172.31.24.31:8888/script/newdockerfile.sh
 1.-O参数将下载的文件重命名,并有覆盖作用
 wget  -q  http://172.31.24.31:8888/script/newdockerfile.sh  -O  dockerfile.sh
-30.
-shell脚本if判断语句
-31.
+```
+### shell脚本if判断语句
 1.例子
+```code
 if [ $deploy_name == "kkcloud_snowflake" ];then
 echo 'idy'
 else
-echo 'kubilai'
+echo 'not kksnow'
 fi
+```
