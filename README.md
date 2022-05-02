@@ -151,9 +151,9 @@ docker run -d --restart always -p 10240:8080 -p 10241:50000 -v /var/jenkins_home
 > 准备两台虚拟机
 ```code
 机器A：192.168.1.200
-8G内存 20G硬盘  规划安装 Docker、 Kuboard Spray 、Kuboard 、Gitlab 、Harbor 、Jenkins
+6G内存 20G硬盘  规划安装 Docker、 Kuboard Spray 、Kuboard 、Gitlab 、Harbor 、Jenkins
 机器B:192.168.1.201
-8G内存 20G硬盘  不要装Docker，规划k8s的master和etcd节点、worker节点
+6G内存 20G硬盘  不要装Docker，规划k8s的master和etcd节点、worker节点
 ```
 > 机器A和B配置上基本网络环境
 步骤安装上述,注意检查DNS /etc/resolv.conf 有没有乱码dns，要去掉
@@ -278,9 +278,46 @@ echo "/bin/bash /data/app/harbor/startall.sh" >>/etc/rc.d/rc.local
 chmod +x /etc/rc.d/rc.local
 ```
 
+## Gitlab
+参考地址 https://docs.gitlab.com/ee/install/docker.html#install-gitlab-using-docker-engine
+> 镜像安装
+```code
+docker run --detach \
+  --publish 30300:80 --publish 30301:443 --publish 30302:22 \
+  --name gitlab \
+  --restart always \
+  --volume $GITLAB_HOME/config:/etc/gitlab \
+  --volume $GITLAB_HOME/logs:/var/log/gitlab \
+  --volume $GITLAB_HOME/data:/var/opt/gitlab \
+  gitlab/gitlab-ce:latest
+```
 
+> 获取root初始密码，这里获取的密码如果不能登录gitlab，直接用第三步重置root密码
+注意：The password file will be automatically deleted in the first reconfigure run after 24 hours.
+```code
+docker exec -it gitlab grep 'Password:' /etc/gitlab/initial_root_password
+```
 
+> web界面首次修改root密码
+```code
+右上角 -> Edit profile -> password
+```
 
+> reset password
+```code
+docker exec -it gitlab bash
+gitlab-rake "gitlab:password:reset"
+```
+
+> 修改gitllab显示的clone地址，不然是一串数字乱码
+```code
+docker exec -it -u root gitlab bash
+vi /opt/gitlab/embedded/service/gitlab-rails/config/gitlab.yml
+修改地址 host: 192.168.1.200
+        port: 30300
+gitlab-ctl restart
+```
+![image](https://user-images.githubusercontent.com/82021554/166206421-9b6443f2-124f-49f0-ac77-fb2b940fd19a.png)
 
 
 
