@@ -319,7 +319,26 @@ gitlab-ctl restart
 ```
 ![image](https://user-images.githubusercontent.com/82021554/166206421-9b6443f2-124f-49f0-ac77-fb2b940fd19a.png)
 
-
+## Jenkins
+> 1、安装
+```code
+参考地址 https://www.cnblogs.com/fuzongle/p/12834080.html
+```
+```code
+mkdir -p /var/jenkins_home && chmod 777 /var/jenkins_home
+docker run -d --restart always -p 30400:8080 -p 30401:50000 -v /var/jenkins_home:/var/jenkins_home -v /etc/localtime:/etc/localtime --name jenkins jenkins/jenkins
+```
+> 2、安装镜像加速
+```code
+修改文件 vi /var/jenkins_home/hudson.model.UpdateCenter.xml
+将url改为 https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json
+```
+> 3、获取默认admin初始密码
+访问网站 http://192.168.1.200:30400/，云平台注意打开防火墙端口30400
+```code
+cat /var/jenkins_home/secrets/initialAdminPassword
+```
+> 4、点击安装推荐的插件按钮即可
 
 
 
