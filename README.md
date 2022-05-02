@@ -149,17 +149,18 @@ docker run -d --restart always -p 10240:8080 -p 10241:50000 -v /var/jenkins_home
 ## k8s环境搭建
 > 准备两台虚拟机
 ```code
-机器A：
+机器A：192.168.1.200
 8G内存 20G硬盘  规划安装 Docker、 Kuboard Spray 、Kuboard 、Gitlab 、Harbor 、Jenkins
-机器B:
+机器B:192.168.1.201
 8G内存 20G硬盘  不要装Docker，规划k8s的master和etcd节点、worker节点
 ```
 > 机器A和B配置上基本网络环境
 步骤安装上述,注意检查DNS /etc/resolv.conf 有没有乱码dns，要去掉
 > 只机器A安装Docker环境
 步骤安装上述
-### Kuboard Spray 
+### Kuboard Spray 用于集群安装
 文档 https://kuboard.cn/install/install-k8s.html#%E5%AE%89%E8%A3%85-kuboard-spray
+> 镜像安装
 ```code
 docker run -d \
   --privileged \
@@ -177,8 +178,32 @@ docker run -d \
 > 填写B服务器信息，勾选master、worker、etcd，写etcd名字
 ![image](https://user-images.githubusercontent.com/82021554/166192008-bea2ba67-5535-4732-b382-2f453e70dbc6.png)
 
+### Kuboard 用于集群管理
+文档
+> 镜像安装
+```code
+docker run -d \
+  --restart=unless-stopped \
+  --name=kuboard \
+  -p 30100:80/tcp \
+  -p 30101:10081/tcp \
+  -e KUBOARD_ENDPOINT="http://192.168.1.200:30100" \
+  -e KUBOARD_AGENT_SERVER_TCP_PORT="30101" \
+  -v /root/kuboard-data:/data \
+  eipwork/kuboard:v3
+```
+> 登录
+```code
+在浏览器打开地址 http://这台机器的IP:30100， 输入用户名 admin，默认密码 Kuboard123，即可登录 Kuboard 界面。如果端口访问不了，看防火墙关闭。
+```
+> 填写B集群信息
+到B机器拷贝kube信息 
+```code
+cat ~/.kube/config
+```
+![image](https://user-images.githubusercontent.com/82021554/166196775-4f7ad420-b633-42bc-bbc8-ba38a18b9790.png)
 
-
+![image](https://user-images.githubusercontent.com/82021554/166196664-debcb7c4-c481-416c-9bd6-baf780a66093.png)
 
 
 
