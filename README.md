@@ -27,6 +27,13 @@ sed -i 's|ONBOOT=no|ONBOOT=yes|g' /etc/sysconfig/network-scripts/ifcfg-enp0s3
 ```code
 systemctl restart network
 ```
+> 1.4 设置DNS
+```code
+DNS配置增加，要重启reboot
+# vi /etc/resolv.conf
+nameserver 114.114.114.114
+nameserver 114.114.114.115
+```
 ### 方式二：手动设置静态ip地址
 ```code
 [root@localhost ~]# vi /etc/sysconfig/network-scripts/ifcfg-enp0s3
@@ -50,6 +57,48 @@ GATEWAY=192.168.1.1 #网关IP
 NETMASK=255.255.255.0 #子网掩码
 DNS1=114.114.114.114 #首先DNS地址
 ```
+### Centos7软件的镜像设置清华源
+> 设置软件源
+```code
+sed -e 's|^mirrorlist=|#mirrorlist=|g' \
+         -e 's|^#baseurl=http://mirror.centos.org|baseurl=https://mirrors.tuna.tsinghua.edu.cn|g' \
+         -i.bak \
+         /etc/yum.repos.d/CentOS-*.repo
+```
+> 更新缓存
+```code
+yum makecache
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## linux常用命令
 更多命令大全参考:https://www.runoob.com/linux/linux-command-manual.html
