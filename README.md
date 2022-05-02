@@ -29,7 +29,6 @@ systemctl restart network
 ```
 > 1.4 设置DNS
 ```code
-DNS配置增加，要重启reboot
 # vi /etc/resolv.conf
 nameserver 114.114.114.114
 nameserver 114.114.114.115
@@ -58,7 +57,7 @@ NETMASK=255.255.255.0 #子网掩码
 DNS1=114.114.114.114 #首先DNS地址
 ```
 ### Centos7软件的镜像设置清华源
-> 设置软件源
+> 设置yum源
 ```code
 sed -e 's|^mirrorlist=|#mirrorlist=|g' \
          -e 's|^#baseurl=http://mirror.centos.org|baseurl=https://mirrors.tuna.tsinghua.edu.cn|g' \
@@ -69,8 +68,69 @@ sed -e 's|^mirrorlist=|#mirrorlist=|g' \
 ```code
 yum makecache
 ```
+## 安装docker引擎
+```code
+#配置主机名：
+hostnamectl set-hostname zy-nph-skg-dev-k8s-master01  && bash
+
+#关闭防火墙
+systemctl stop firewalld && systemctl disable firewalld
+
+#安装 iptables
+yum install iptables-services -y
+
+#禁用 iptables
+service iptables stop && systemctl disable iptables
+
+#关闭 selinux
+setenforce 0
+sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+
+#安装基础软件包
+yum install -y wget net-tools nfs-utils lrzsz gcc gcc-c++ make cmake libxml2-devel openssl-devel curl curl-devel unzip sudo ntp libaio-devel wget vim ncurses-devel autoconf automake zlib-devel python-devel epel-release openssh-server socat ipvsadm conntrack yum-utils
+
+#配置 docker-ce 国内 yum 源（阿里云）
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+
+#安装 docker 依赖包
+yum install -y yum-utils device-mapper-persistent-data lvm2
+
+#安装 docker-ce
+yum install docker-ce docker-ce-cli containerd.io
+
+#设置开机启动
+systemctl enable docker
+
+#启动Docker服务
+systemctl start docker
+```
+> 配置镜像加速器
+```code
+cat > /etc/docker/daemon.json <<EOF
+{
+"registry-mirrors":[
+"https://registry.docker-cn.com",
+"https://docker.mirrors.ustc.edu.cn",
+"https://dockerhub.azk8s.cn",
+"http://hub-mirror.c.163.com"
+],
+"exec-opts": ["native.cgroupdriver=systemd"],
+"data-root": "/data/docker",
+"insecure-registries":[
+"172.31.24.40",
+"skg.harbor.bjshxg.com",
+"172.31.170.19",
+"fat.harbor.bjshxg.com"]
+}
+EOF
 
 
+
+#重启docker服务
+systemctl daemon-reload
+systemctl restart docker
+systemctl status docker
+```
 
 
 
