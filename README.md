@@ -232,14 +232,16 @@ docker-compose version
 wget https://github.com/goharbor/harbor/releases/download/v2.5.0/harbor-online-installer-v2.5.0.tgz
 
 #解压harbor安装包
+mkdir -p /data/app/
 tar xf harbor-online-installer-v2.5.0.tgz -C /data/app/
 
 #编辑harbor.yml文件
 cd /data/app/harbor
 cp harbor.yml.tmpl harbor.yml
 
-vim harbor.yml
-hostname:   harbor01.k8s.com   #主机IP/或者域名
+vi harbor.yml
+port: 30200    # 端口可改为30200
+hostname:   192.168.1.200   #主机IP/或者域名
 harbor_admin_password: Harbor12345   #harbor UI界面admin登陆密码
 data_volume: /data/app/harbor-data  #harbor 持久化数据
 
@@ -255,6 +257,8 @@ data_volume: /data/app/harbor-data  #harbor 持久化数据
 # 安装脚本
 运行 ./install.sh
 ```
+![image](https://user-images.githubusercontent.com/82021554/166200641-8d89e70f-3fa5-41a5-903b-c30d1db34068.png)
+
 > 设置Harbor开启启动
 ```code
 # 编写启动脚本
