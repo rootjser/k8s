@@ -11,7 +11,7 @@
 
 <a style="text-decoration: underline;" href="https://github.com/rootjser/k8s/blob/main/README.md#jenkins-1" target="_blank"><h3>Jenkins</h3></a>
 
-<a style="text-decoration: underline;" href="https://github.com/rootjser/k8s/blob/main/README.md#pipeline-%E6%B5%81%E6%B0%B4%E7%BA%BF%E8%84%9A%E6%9C%AC-1" target="_blank"><h3>linux常用命令</h3></a>
+<a style="text-decoration: underline;" href="https://github.com/rootjser/k8s/blob/main/README.md#pipeline-%E6%B5%81%E6%B0%B4%E7%BA%BF%E8%84%9A%E6%9C%AC-1" target="_blank"><h3>pipeline-流水线脚本</h3></a>
 
 <a style="text-decoration: underline;" href="https://github.com/rootjser/k8s/blob/main/README.md#linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4-1" target="_blank"><h3>linux常用命令</h3></a>
 
