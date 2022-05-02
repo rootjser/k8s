@@ -1,13 +1,12 @@
 # k8s
-<a style="text-decoration: underline;" href="https://github.com/rootjser/k8s/blob/main/README.md#virtualbox-%E5%92%8C-centos-%E4%B8%8B%E8%BD%BD" target="_blank"><h3>VirtualBox和Centos</h3></a>
+<a style="text-decoration: underline;" href="#virtualbox-%E5%92%8C-centos-%E4%B8%8B%E8%BD%BD" target="_blank"><h3>VirtualBox和Centos</h3></a>
+<a style="text-decoration: underline;" href="#docker-1" target="_blank"><h3>Docker</h3></a>
+<a style="text-decoration: underline;" href="#k8s%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA" target="_blank"><h3>k8s环境搭建</h3></a>
+<a style="text-decoration: underline;" href="#harbor" target="_blank"><h3>Harbor</h3></a>
+<a style="text-decoration: underline;" href="#gitlab" target="_blank"><h3>Gitlab</h3></a>
+<a style="text-decoration: underline;" href="#jenkins" target="_blank"><h3>Jenkins</h3></a>
+<a style="text-decoration: underline;" href="#linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4" target="_blank"><h3>linux常用命令</h3></a>
 
-<a style="text-decoration: underline;" href="https://github.com/rootjser/k8s/blob/main/README.md#virtualbox-%E5%92%8C-centos-%E4%B8%8B%E8%BD%BD" target="_blank"><h3>VirtualBox和Centos</h3></a>
-
-<a style="text-decoration: underline;" href="https://github.com/rootjser/k8s/blob/main/README.md#virtualbox-%E5%92%8C-centos-%E4%B8%8B%E8%BD%BD" target="_blank"><h3>VirtualBox和Centos</h3></a>
-
-<a style="text-decoration: underline;" href="https://github.com/rootjser/k8s/blob/main/README.md#Docker" target="_blank"><h3>Docker</h3></a>
-
-<a style="text-decoration: underline;" href="https://github.com/rootjser/k8s/blob/main/README.md#virtualbox-%E5%92%8C-centos-%E4%B8%8B%E8%BD%BD" target="_blank"><h3>VirtualBox和Centos</h3></a>
 ## VirtualBox 和 CentOS 下载
 > VirtualBox
 ```code
