@@ -146,9 +146,29 @@ docker exec -it --user root [containerID] bash  用root进入容器shell
 docker container cp [containID]:[/path/to/file]  /path/to/file 从正在运行的 Docker 容器里面，将文件拷贝到本机，两路径可交换
 docker run -d --restart always -p 10240:8080 -p 10241:50000 -v /var/jenkins_home:/var/jenkins_home -v /etc/localtime:/etc/localtime --name myjenkins jenkins/jenkins 运行jenkins容器，如果没有回下载镜像再安装容器，-d 后台运行  -p 端口映射 -v 目录挂载 --name 设置容器名称
 ```
-
-
-
+## k8s环境搭建
+> 准备两台虚拟机
+```code
+机器A：
+8G内存 20G硬盘  规划安装 Docker、 Kuboard Spray 、Kuboard 、Gitlab 、Harbor 、Jenkins、k8s的master和etcd节点
+机器B:
+8G内存 20G硬盘  不要装Docker，规划k8s的worker节点
+```
+> 机器A和B配置上基本网络环境
+步骤安装上述
+> 只机器A安装Docker环境
+步骤安装上述
+### Kuboard Spray 
+```code
+docker run -d \
+  --privileged \
+  --restart=unless-stopped \
+  --name=kuboard-spray \
+  -p 30000:80/tcp \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v ~/kuboard-spray-data:/data \
+ eipwork/kuboard-spray:latest-amd64
+```
 
 
 
