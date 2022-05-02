@@ -13,17 +13,17 @@ https://mirrors.tuna.tsinghua.edu.cn/centos/7.9.2009/isos/x86_64/CentOS-7-x86_64
 ## 虚拟机开启网络
 最小化安装的操作系统是没有配置网络的需要开启
 ### 方式一：设置获取动态ip地址
-#### 1.1 查看网卡信息
+> 1.1 查看网卡信息
 ```code
 ip a 
 ip a|head
 ```
-#### 1.2 修改网卡参数ONBOT=no改为yes
+> 1.2 修改网卡参数ONBOT=no改为yes
 ifcfg-enp0s3是上面看到的网卡名
 ```code
 sed -i 's|ONBOOT=no|ONBOOT=yes|g' /etc/sysconfig/network-scripts/ifcfg-enp0s3
 ```
-#### 1.3 重启网卡服务
+> 1.3 重启网卡服务
 ```code
 systemctl restart network
 ```
@@ -53,42 +53,27 @@ DNS1=114.114.114.114 #首先DNS地址
 
 ## linux常用命令
 更多命令大全参考:https://www.runoob.com/linux/linux-command-manual.html
-### 查看操作系统信息
 ```code
+> 查看操作系统信息
 cat /etc/redhat-release
-```
-### 查看cpu个数
-```code
+> 查看cpu个数
 cat /proc/cpuinfo| grep "processor"| wc -l
-```
-### 查看内存
-```code
+> 查看内存
 free -m
-```
-### 查看磁盘空间
-```code
+> 查看磁盘空间
 df -h
-```
-### 查看端口
-```code
+> 查看端口
 netstat -lnpt 
-```
-### 查看进程
-```code
+> 查看进程
 ps  -ef 
-```
-### echo用于字符串的输出
-```code
+> echo用于字符串的输出
 显示命令执行结果
 echo `date`
 注意： 这里使用的是反引号 `, 而不是单引号 '。
-```
-```code
+>
 输出字符串或变量不换行
 echo -n  "hello world"
-```
-### read 命令从标准输入中读取一行,并把输入行的每个字段的值指定给 shell 变量
-```code
+> read 命令从标准输入中读取一行,并把输入行的每个字段的值指定给 shell 变量
 #!/bin/sh
 read name
 echo "$name It is a test"
