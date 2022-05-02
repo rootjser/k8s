@@ -339,7 +339,34 @@ docker run -d --restart always -p 30400:8080 -p 30401:50000 -v /var/jenkins_home
 cat /var/jenkins_home/secrets/initialAdminPassword
 ```
 > 4、点击安装推荐的插件按钮即可
-
+```code
+推荐额外需要安装的插件名称：
+1.AnsiColor  终端字体显示颜色插件
+2.Role-based Authorization Strategy  用户角色权限管理插件
+3.Permissive Script Security  允许管理员检查安全提示脚本
+4.参数化构建插件：
+Extended Choice Parameter
+Active Choices
+Extensible Choice Parameter
+Dynamic Extended Choice Parameter
+Maven Artifact ChoiceListProvider (Nexus)
+Persistent Parameter
+Text File Operations
+Editable Choice
+5.groovy插件：
+Groovy
+Groovy Postbuild
+6.git插件：
+Git Pipeline for Blue Ocean
+GitHub Pipeline for Blue Ocean
+Git Parameter
+GitLab
+Docker API
+7.rebuild插件
+Rebuilder
+8.代码质量扫描插件
+SonarQube Scanner
+```
 
 
 
