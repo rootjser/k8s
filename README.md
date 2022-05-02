@@ -450,8 +450,8 @@ pipeline {
                     sh '''
                         node -v
                         npm install --registry https://registry.npm.taobao.org
-    				    npm run build
-				    '''
+    			npm run build
+		   '''
                 }
             }
         }
