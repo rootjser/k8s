@@ -159,6 +159,7 @@ docker run -d --restart always -p 10240:8080 -p 10241:50000 -v /var/jenkins_home
 > 只机器A安装Docker环境
 步骤安装上述
 ### Kuboard Spray 
+文档 https://kuboard.cn/install/install-k8s.html#%E5%AE%89%E8%A3%85-kuboard-spray
 ```code
 docker run -d \
   --privileged \
@@ -170,7 +171,7 @@ docker run -d \
  eipwork/kuboard-spray:latest-amd64
 ```
 > 登录
-在浏览器打开地址 http://这台机器的IP:30000， 输入用户名 admin，默认密码 Kuboard123，即可登录 Kuboard-Spray 界面。
+在浏览器打开地址 http://这台机器的IP:30000， 输入用户名 admin，默认密码 Kuboard123，即可登录 Kuboard-Spray 界面。如果端口访问不了，看防火墙关闭。
 
 
 
