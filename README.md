@@ -386,7 +386,24 @@ SonarQube Scanner
 ## Pipeline 流水线脚本
 > 服务器配置Node 16.x环境（可跳过）
 ```code
+# 方式一
 curl -sL https://rpm.nodesource.com/setup_16.x | bash - yum install nodejs -y
+
+# 方式二
+yum install -y wget
+cd /usr/local
+wget https://npm.taobao.org/mirrors/node/v16.15.0/node-v16.15.0-linux-x64.tar.gz
+tar -zxf node-v16.15.0-linux-x64.tar.gz
+ln -s node-v16.15.0-linux-x64 node
+vi /etc/profile
+最后写入
+export NODE_HOME=/usr/local/node/
+export PATH=$NODE_HOME/bin:$PATH
+
+# 退出执行
+source /etc/profile
+# 查看node与npm版本
+node -v
 ```
 > Jenkins配置Node环境
 ```code
