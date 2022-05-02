@@ -444,6 +444,11 @@ cat > /etc/docker/daemon.json <<EOF
 "192.168.1.200:30200"]
 }
 EOF
+
+#重启docker服务
+systemctl daemon-reload
+systemctl restart docker
+systemctl status doc
 ```
 
 > 新建流水线任务pipeline脚本
