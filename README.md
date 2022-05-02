@@ -388,6 +388,7 @@ SonarQube Scanner
 ```code
 curl -sL https://rpm.nodesource.com/setup_16.x | bash - yum install nodejs -y
 ```
+
 > 增加gitlabroot凭据
 Dashboard > 凭据 > 系统 > 全局凭据 (unrestricted)
 ![image](https://user-images.githubusercontent.com/82021554/166216941-2a4cb17e-49c7-44f2-be2a-de7950a8b114.png)
