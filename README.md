@@ -150,12 +150,12 @@ docker run -d --restart always -p 10240:8080 -p 10241:50000 -v /var/jenkins_home
 > 准备两台虚拟机
 ```code
 机器A：
-8G内存 20G硬盘  规划安装 Docker、 Kuboard Spray 、Kuboard 、Gitlab 、Harbor 、Jenkins、k8s的master和etcd节点
+8G内存 20G硬盘  规划安装 Docker、 Kuboard Spray 、Kuboard 、Gitlab 、Harbor 、Jenkins
 机器B:
-8G内存 20G硬盘  不要装Docker，规划k8s的worker节点
+8G内存 20G硬盘  不要装Docker，规划k8s的master和etcd节点、worker节点
 ```
 > 机器A和B配置上基本网络环境
-步骤安装上述
+步骤安装上述,注意检查DNS /etc/resolv.conf 有没有乱码dns，要去掉
 > 只机器A安装Docker环境
 步骤安装上述
 ### Kuboard Spray 
@@ -174,8 +174,8 @@ docker run -d \
 ```code
 在浏览器打开地址 http://这台机器的IP:30000， 输入用户名 admin，默认密码 Kuboard123，即可登录 Kuboard-Spray 界面。如果端口访问不了，看防火墙关闭。
 ```
+> 填写B服务器信息，勾选master、worker、etcd，写etcd名字
 ![image](https://user-images.githubusercontent.com/82021554/166192008-bea2ba67-5535-4732-b382-2f453e70dbc6.png)
-
 
 
 
