@@ -3,15 +3,15 @@
 
 <a style="text-decoration: underline;" href="https://github.com/rootjser/k8s/blob/main/README.md#docker-1" target="_blank"><h3>Docker</h3></a>
 
-<a style="text-decoration: underline;" href="https://github.com/rootjser/k8s/blob/main/README.md#k8s%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA" target="_blank"><h3>k8s环境搭建</h3></a>
+<a style="text-decoration: underline;" href="https://github.com/rootjser/k8s/blob/main/README.md#k8s%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA-1" target="_blank"><h3>k8s环境搭建</h3></a>
 
-<a style="text-decoration: underline;" href="https://github.com/rootjser/k8s/blob/main/README.md#harbor" target="_blank"><h3>Harbor</h3></a>
+<a style="text-decoration: underline;" href="https://github.com/rootjser/k8s/blob/main/README.md#harbor-1" target="_blank"><h3>Harbor</h3></a>
 
-<a style="text-decoration: underline;" href="https://github.com/rootjser/k8s/blob/main/README.md#gitlab" target="_blank"><h3>Gitlab</h3></a>
+<a style="text-decoration: underline;" href="https://github.com/rootjser/k8s/blob/main/README.md#gitlab-1" target="_blank"><h3>Gitlab</h3></a>
 
-<a style="text-decoration: underline;" href="https://github.com/rootjser/k8s/blob/main/README.md#jenkins" target="_blank"><h3>Jenkins</h3></a>
+<a style="text-decoration: underline;" href="https://github.com/rootjser/k8s/blob/main/README.md#jenkins-1" target="_blank"><h3>Jenkins</h3></a>
 
-<a style="text-decoration: underline;" href="https://github.com/rootjser/k8s/blob/main/README.md#linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4" target="_blank"><h3>linux常用命令</h3></a>
+<a style="text-decoration: underline;" href="https://github.com/rootjser/k8s/blob/main/README.md#linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4-1" target="_blank"><h3>linux常用命令</h3></a>
 
 ## VirtualBox 和 CentOS 下载
 > VirtualBox
