@@ -1,11 +1,11 @@
 # k8s
 
 ## VirtualBox 和 CentOS 下载
-### VirtualBox
+> VirtualBox
 ```code
 https://www.oracle.com/virtualization/technologies/vm/downloads/virtualbox-downloads.html
 ```
-### CentOS
+> CentOS
 ```code
 https://mirrors.tuna.tsinghua.edu.cn/centos/7.9.2009/isos/x86_64/CentOS-7-x86_64-DVD-2009.iso
 ```
