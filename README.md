@@ -425,7 +425,38 @@ Dashboard > 凭据 > 系统 > 全局凭据 (unrestricted)
 
 ![image](https://user-images.githubusercontent.com/82021554/166216941-2a4cb17e-49c7-44f2-be2a-de7950a8b114.png)
 
->
+> 新建流水线任务pipeline脚本
+```code
+
+pipeline {
+    agent any
+	
+	environment {
+        // 全局变量
+        imageTag = sh returnStdout: true, script: "date +%Y%m%d%H%M%S"
+    }
+	
+    stages {
+        stage('拉取代码') {
+            steps {
+                git branch: 'main',credentialsId: 'gitlabroot', url: 'http://192.168.1.200:30300/root/webtest.git'
+            }
+        }
+        stage('编译代码') {
+            steps {
+                script{
+                    sh '''
+                        node -v
+                        npm install --registry https://registry.npm.taobao.org
+    				    npm run build
+				    '''
+                }
+            }
+        }
+    }
+}
+
+```
 
 
 
