@@ -455,12 +455,13 @@ pipeline {
 	environment {
         // 全局变量
         imageTag = sh returnStdout: true, script: "date +%Y%m%d%H%M%S"
+        app = 'webtest'
     }
 	
     stages {
         stage('拉取代码') {
             steps {
-                git branch: 'main',credentialsId: 'gitlabroot', url: 'http://192.168.1.200:30300/root/webtest.git'
+                git branch: 'main',credentialsId: 'gitlabroot', url: "http://192.168.1.200:30300/root/${app}.git"
             }
         }
         stage('编译代码') {
@@ -469,13 +470,37 @@ pipeline {
                     sh '''
                         node -v
                         npm install --registry https://registry.npm.taobao.org
-    			npm run build
-		   '''
+    				    npm run build
+				    '''
+                }
+            }
+        }
+        stage('打包docker') {
+            steps {
+                script{
+                    sh '''
+                        docker build -t 127.0.0.1:30200/library/${app}:${imageTag} .
+                        
+				    '''
+                }
+            }
+        }
+        stage('上传镜像') {
+            steps {
+                script{
+                    sh '''
+                        docker login --username=admin --password=Harbor12345 127.0.0.1:30200
+                        docker push 127.0.0.1:30200/library/${app}:${imageTag}
+                        sleep 1
+                        docker rmi 127.0.0.1:30200/library/${app}:${imageTag}
+				    '''
                 }
             }
         }
     }
 }
+
+
 
 ```
 
