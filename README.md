@@ -343,9 +343,8 @@ gitlab-ctl restart
 参考地址 https://www.cnblogs.com/fuzongle/p/12834080.html
 ```
 ```code
-mkdir -p /var/jenkins_home && chmod 777 /var/jenkins_home
-docker run -d --restart always -p 30400:8080 -p 30401:50000 -v /var/jenkins_home:/var/jenkins_home -v /etc/localtime:/etc/localtime --name jenkins jenkins/jenkins
-docker run -d --restart always -p 30500:8080 -p 30501:50000 -v /var/jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker -v /etc/localtime:/etc/localtime --name jenkins2 docker.io/jenkins/jenkins
+mkdir -p /var/jenkins_home && chmod 777 /var/jenkins_home && chmod 777 /var/run/docker.sock
+docker run -d --restart always -p 30400:8080 -p 30401:50000 -v /var/jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker -v /etc/localtime:/etc/localtime --name jenkins docker.io/jenkins/jenkins
 ```
 > 2、安装镜像加速
 ```code
