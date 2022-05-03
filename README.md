@@ -337,6 +337,7 @@ gitlab-ctl restart
 ![image](https://user-images.githubusercontent.com/82021554/166206421-9b6443f2-124f-49f0-ac77-fb2b940fd19a.png)
 
 ## Jenkins
+参考 http://www.360doc.com/content/20/1008/15/61746833_939429398.shtml
 > 1、安装
 ```code
 参考地址 https://www.cnblogs.com/fuzongle/p/12834080.html
@@ -344,6 +345,7 @@ gitlab-ctl restart
 ```code
 mkdir -p /var/jenkins_home && chmod 777 /var/jenkins_home
 docker run -d --restart always -p 30400:8080 -p 30401:50000 -v /var/jenkins_home:/var/jenkins_home -v /etc/localtime:/etc/localtime --name jenkins jenkins/jenkins
+docker run -d --restart always -p 30500:8080 -p 30501:50000 -v /var/jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker -v /etc/localtime:/etc/localtime --name jenkins2 docker.io/jenkins/jenkins
 ```
 > 2、安装镜像加速
 ```code
