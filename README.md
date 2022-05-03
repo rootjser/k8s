@@ -389,6 +389,22 @@ Rebuilder
 SonarQube Scanner
 ```
 
+## Dockerfile
+> 前端打包后只需要nginx
+```code
+# nginx 基础镜像
+FROM nginx
+# root 用户
+# USER root
+# copy 打包文件到nginx 的www目录
+COPY ./build/ /usr/share/nginx/html
+# 声明端口
+# EXPOSE 80
+# 启动nginx
+# ENTRYPOINT ["/docker-entrypoint.sh"]
+# CMD ["nginx" "-g" "daemon off;"]
+```
+
 ## Pipeline 流水线脚本
 > 服务器配置Node 16.x环境（可跳过）
 ```code
@@ -507,6 +523,11 @@ pipeline {
 
 ```
 
+## k8s部署
+> 创建工作负载
+![image](https://user-images.githubusercontent.com/82021554/166404650-c7bbb846-155b-4eb8-a354-ce8093c8c89d.png)
+![image](https://user-images.githubusercontent.com/82021554/166404672-dd270058-8721-47fa-b41d-2f30f522e340.png)
+![image](https://user-images.githubusercontent.com/82021554/166404686-b3770374-c85a-43ca-afdd-e5f924a7c8d2.png)
 
 
 
