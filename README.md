@@ -194,6 +194,9 @@ docker run -d \
 > 填写B服务器信息，勾选master、worker、etcd，写etcd名字
 ![image](https://user-images.githubusercontent.com/82021554/166192008-bea2ba67-5535-4732-b382-2f453e70dbc6.png)
 
+> 填写私有Harbor仓库地址
+![image](https://user-images.githubusercontent.com/82021554/166404089-24ab0162-c4ae-4830-be8b-e49f38ec4e32.png)
+
 ### Kuboard 用于集群管理
 文档
 > 镜像安装
