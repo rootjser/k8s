@@ -490,7 +490,7 @@ systemctl status docker
 ```
 > 创建deployment.yaml脚本
 
-在kuboard中部署一个docker nginx服务，拷贝deployment.yaml文件，隐藏status字段，修改里面的项目名，镜像名等变量，用于下面pipeline脚本的kubectl部署
+在kuboard中部署一个docker nginx服务，拷贝deployment.yaml文件，隐藏status字段，去掉两个resourceVersion段，修改里面的项目名，镜像名等变量，用于下面pipeline脚本的kubectl部署
 ![image](https://user-images.githubusercontent.com/82021554/166627986-4cea58b6-1ad0-42cb-a9ad-f07eb3e8d17a.png)
 ![image](https://user-images.githubusercontent.com/82021554/166628680-f404a15b-dfc4-4400-90fe-4df11045978b.png)
 把appName替换里面的项目名webtest，把Tag替换版本号
@@ -506,7 +506,6 @@ metadata:
     k8s.kuboard.cn/name: appName
   name: appName
   namespace: kuboard
-  resourceVersion: '65790'
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
@@ -550,7 +549,6 @@ metadata:
     k8s.kuboard.cn/name: appName
   name: appName
   namespace: kuboard
-  resourceVersion: '21037'
 spec:
   clusterIP: 10.233.37.128
   clusterIPs:
