@@ -370,7 +370,7 @@ chmod a+x /usr/local/bin/kube*
 参考地址 https://www.cnblogs.com/fuzongle/p/12834080.html
 ```
 ```code
-mkdir -p /var/jenkins_home && chmod 777 /var/jenkins_home && chmod 777 /var/run/docker.sock
+mkdir -p /var/jenkins_home/k8s && chmod 777 /var/jenkins_home && chmod 777 /var/run/docker.sock
 docker run -d --restart always -p 30400:8080 -p 30401:50000 -v /var/jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker -v /etc/localtime:/etc/localtime -v /usr/local/bin/kubectl:/usr/bin/kubectl --name jenkins docker.io/jenkins/jenkins
 ```
 > 2、安装镜像加速
@@ -494,6 +494,7 @@ systemctl status docker
 ![image](https://user-images.githubusercontent.com/82021554/166627986-4cea58b6-1ad0-42cb-a9ad-f07eb3e8d17a.png)
 ![image](https://user-images.githubusercontent.com/82021554/166628680-f404a15b-dfc4-4400-90fe-4df11045978b.png)
 把appName替换里面的项目名webtest，把Tag替换版本号
+放到/var/jenkins_home/k8s目录
 ```code
 ---
 apiVersion: apps/v1
@@ -589,7 +590,11 @@ COPY ./build/ /usr/share/nginx/html
 # ENTRYPOINT ["/docker-entrypoint.sh"]
 # CMD ["nginx" "-g" "daemon off;"]
 ```
-
+> 添加777权限
+```code
+chmod 777 /var/jenkins_home/k8s/deployment.yaml 
+chmod 777 /var/jenkins_home/k8s/Dockerfile
+```
 > 新建流水线任务pipeline脚本
 ```code
 
