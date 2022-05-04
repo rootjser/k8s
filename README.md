@@ -488,6 +488,11 @@ systemctl daemon-reload
 systemctl restart docker
 systemctl status docker
 ```
+> 创建deployment.yaml脚本
+
+在kuboard中部署一个docker nginx服务，拷贝deployment.yaml文件，隐藏status字段，修改里面的项目名，镜像名等变量，用于下面pipeline脚本的kubectl部署
+![image](https://user-images.githubusercontent.com/82021554/166627986-4cea58b6-1ad0-42cb-a9ad-f07eb3e8d17a.png)
+
 
 > 新建流水线任务pipeline脚本
 ```code
