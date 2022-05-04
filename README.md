@@ -343,6 +343,14 @@ gitlab-ctl restart
 ```
 ![image](https://user-images.githubusercontent.com/82021554/166206421-9b6443f2-124f-49f0-ac77-fb2b940fd19a.png)
 
+## 配置Kubectl
+现在宿主机安装Kubectl，后续Jenkins直接用，注意v1.23.6使用k8s版本对应
+```code
+wget https://dl.k8s.io/v1.23.6/kubernetes-client-linux-amd64.tar.gz
+tar -xzvf kubernetes-client-linux-amd64.tar.gz
+cp kubernetes/client/bin/kube* /usr/local/bin/
+chmod a+x /usr/local/bin/kube*
+```
 ## Jenkins
 参考 http://www.360doc.com/content/20/1008/15/61746833_939429398.shtml
 > 1、安装
@@ -351,7 +359,7 @@ gitlab-ctl restart
 ```
 ```code
 mkdir -p /var/jenkins_home && chmod 777 /var/jenkins_home && chmod 777 /var/run/docker.sock
-docker run -d --restart always -p 30400:8080 -p 30401:50000 -v /var/jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker -v /etc/localtime:/etc/localtime --name jenkins docker.io/jenkins/jenkins
+docker run -d --restart always -p 30400:8080 -p 30401:50000 -v /var/jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker -v /etc/localtime:/etc/localtime -v /usr/local/bin/kubectl:/usr/bin/kubectl --name jenkins docker.io/jenkins/jenkins
 ```
 > 2、安装镜像加速
 ```code
