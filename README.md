@@ -492,7 +492,103 @@ systemctl status docker
 
 在kuboard中部署一个docker nginx服务，拷贝deployment.yaml文件，隐藏status字段，修改里面的项目名，镜像名等变量，用于下面pipeline脚本的kubectl部署
 ![image](https://user-images.githubusercontent.com/82021554/166627986-4cea58b6-1ad0-42cb-a9ad-f07eb3e8d17a.png)
+![image](https://user-images.githubusercontent.com/82021554/166628680-f404a15b-dfc4-4400-90fe-4df11045978b.png)
+把appName替换里面的项目名webtest，把Tag替换版本号
+```code
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations: {}
+  labels:
+    k8s.kuboard.cn/layer: svc
+    k8s.kuboard.cn/name: appName
+  name: appName
+  namespace: kuboard
+  resourceVersion: '65790'
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      k8s.kuboard.cn/layer: svc
+      k8s.kuboard.cn/name: appName
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        k8s.kuboard.cn/layer: svc
+        k8s.kuboard.cn/name: appName
+    spec:
+      containers:
+        - image: 'my-registry.com/library/appName:TAG'
+          imagePullPolicy: IfNotPresent
+          name: appName
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations: {}
+  labels:
+    k8s.kuboard.cn/layer: svc
+    k8s.kuboard.cn/name: appName
+  name: appName
+  namespace: kuboard
+  resourceVersion: '21037'
+spec:
+  clusterIP: 10.233.37.128
+  clusterIPs:
+    - 10.233.37.128
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - name: 8nzxma
+      nodePort: 31001
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    k8s.kuboard.cn/layer: svc
+    k8s.kuboard.cn/name: appName
+  sessionAffinity: None
+  type: NodePort
+
+```
+
+> 创建Dockerfile
+
+把deployment.yaml和Dockerfile都放到/var/jenkins_home/k8s目录，pipeline后面好用
+```code
+# nginx 基础镜像
+FROM nginx
+# root 用户
+# USER root
+# copy 打包文件到nginx 的www目录
+COPY ./build/ /usr/share/nginx/html
+# 声明端口
+# EXPOSE 80
+# 启动nginx
+# ENTRYPOINT ["/docker-entrypoint.sh"]
+# CMD ["nginx" "-g" "daemon off;"]
+```
 
 > 新建流水线任务pipeline脚本
 ```code
