@@ -353,7 +353,7 @@ chmod a+x /usr/local/bin/kube*
 ```
 > 拷贝~/.kube/config文件
 
-从k8s集群拷贝config文件到Jenkins宿主机，/root/.kube目录没有就新建目录，把config文件改好放进去，用于kubectl连接集群，要用notepad++修改server地址为 https://192.168.1.201:6443
+从k8s集群拷贝config文件到Jenkins宿主机，~/.kube目录没有就新建目录，把config文件改好放进去，用于kubectl连接集群，要用notepad++修改server地址为 https://192.168.1.201:6443
 
 ![image](https://user-images.githubusercontent.com/82021554/166621954-41fd9b75-9f9d-459a-b2dc-766e5beb5356.png)
 
@@ -370,8 +370,8 @@ chmod a+x /usr/local/bin/kube*
 参考地址 https://www.cnblogs.com/fuzongle/p/12834080.html
 ```
 ```code
-mkdir -p /var/jenkins_home/k8s && chmod 777 /var/jenkins_home && chmod 777 /var/run/docker.sock
-docker run -d --restart always -p 30400:8080 -p 30401:50000 -v /var/jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker -v /etc/localtime:/etc/localtime -v /usr/local/bin/kubectl:/usr/bin/kubectl --name jenkins docker.io/jenkins/jenkins
+mkdir -p /var/jenkins_home/k8s && chmod 777 /var/jenkins_home && chmod 777 /var/run/docker.sock && chmod 777 ~/.kube
+docker run -d --restart always -p 30400:8080 -p 30401:50000 -v /var/jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker -v /etc/localtime:/etc/localtime -v /usr/local/bin/kubectl:/usr/bin/kubectl -v /root/.kube:/root/.kube --name jenkins docker.io/jenkins/jenkins
 ```
 > 2、安装镜像加速
 ```code
@@ -640,6 +640,20 @@ pipeline {
                         docker push 127.0.0.1:30200/library/${app}:${imageTag}
                         sleep 1
                         docker rmi 127.0.0.1:30200/library/${app}:${imageTag}
+				    '''
+                }
+            }
+        }
+        stage('部署k8s') {
+            steps {
+                script{
+                    sh '''
+                        imageTag=`echo -n ${imageTag}`
+                        cp /var/jenkins_home/k8s/deployment.yaml /var/jenkins_home/k8s/deployment${app}.yaml
+                        mv /var/jenkins_home/k8s/deployment${app}.yaml ./deployment.yaml
+                        sed -i  "s|appName|$app|g" deployment.yaml
+                        sed -i  "s|TAG|$imageTag|g" deployment.yaml
+                        kubectl  apply -f  deployment.yaml
 				    '''
                 }
             }
