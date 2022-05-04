@@ -352,10 +352,15 @@ cp kubernetes/client/bin/kube* /usr/local/bin/
 chmod a+x /usr/local/bin/kube*
 ```
 > 拷贝~/.kube/config文件
+
 从k8s集群拷贝config文件到Jenkins宿主机，/root/.kube目录没有就新建目录，把config文件改好放进去，用于kubectl连接集群，要用notepad++修改server地址为 https://192.168.1.201:6443
+
 ![image](https://user-images.githubusercontent.com/82021554/166621954-41fd9b75-9f9d-459a-b2dc-766e5beb5356.png)
 
-> 在宿主机使用 kubectl cluster-info ，打印出域名就成功了
+> 在宿主机使用 kubectl cluster-info 
+
+打印出域名就成功了
+
 ![image](https://user-images.githubusercontent.com/82021554/166622088-3c98b76d-1912-4ab9-9037-4d653eaf8153.png)
 
 ## Jenkins
