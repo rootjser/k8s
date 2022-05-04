@@ -361,6 +361,12 @@ chmod a+x /usr/local/bin/kube*
 
 打印出域名就成功了
 
+> 讲confg文件放到jenkins目录下改名为kubeconfig
+kubeconfig
+```code
+mkdir -p /var/jenkins_home/k8s && chmod 777 /var/jenkins_home
+cp ~/.kube/config /var/jenkins_home/k8s/kubeconfig
+```
 ![image](https://user-images.githubusercontent.com/82021554/166622088-3c98b76d-1912-4ab9-9037-4d653eaf8153.png)
 
 ## Jenkins
@@ -370,8 +376,8 @@ chmod a+x /usr/local/bin/kube*
 参考地址 https://www.cnblogs.com/fuzongle/p/12834080.html
 ```
 ```code
-mkdir -p /var/jenkins_home/k8s && chmod 777 /var/jenkins_home && chmod 777 /var/run/docker.sock && chmod 777 ~/.kube
-docker run -d --restart always -p 30400:8080 -p 30401:50000 -v /var/jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker -v /etc/localtime:/etc/localtime -v /usr/local/bin/kubectl:/usr/bin/kubectl -v /root/.kube:/root/.kube --name jenkins docker.io/jenkins/jenkins
+mkdir -p /var/jenkins_home/k8s && chmod 777 /var/jenkins_home && chmod 777 /var/run/docker.sock
+docker run -d --restart always -p 30400:8080 -p 30401:50000 -v /var/jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker -v /etc/localtime:/etc/localtime -v /usr/local/bin/kubectl:/usr/bin/kubectl --name jenkins docker.io/jenkins/jenkins
 ```
 > 2、安装镜像加速
 ```code
@@ -653,7 +659,7 @@ pipeline {
                         mv /var/jenkins_home/k8s/deployment${app}.yaml ./deployment.yaml
                         sed -i  "s|appName|$app|g" deployment.yaml
                         sed -i  "s|TAG|$imageTag|g" deployment.yaml
-                        kubectl  apply -f  deployment.yaml
+                        kubectl --kubeconfig /var/jenkins_home/k8s/kubeconfig  apply -f  deployment.yaml
 				    '''
                 }
             }
