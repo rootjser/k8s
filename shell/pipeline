@@ -1,0 +1,77 @@
+pipeline {
+    agent any
+	
+	environment {
+        // 全局变量
+        imageTag = sh returnStdout: true, script: "date +%Y%m%d%H%M%S"
+        app = 'webtest'
+    }
+    
+    parameters {
+        gitParameter name:'MR_TO_BRANCH',
+                     type:'PT_BRANCH_TAG',
+                     branchFilter:'origin/(.*)',
+                     defaultValue:'main',
+                     selectedValue:'DEFAULT',
+                     sortMode:'DESCENDING_SMART',
+                     description:'选择分支'
+    }
+	
+    stages {
+        stage('拉取代码') {
+            steps {
+                git branch: "${MR_TO_BRANCH}",credentialsId: 'gitlabroot', url: "http://192.168.1.150:30300/root/${app}.git"
+            }
+        }
+        stage('编译代码') {
+            steps {
+                script{
+                    sh '''
+                        echo "分支: ${MR_TO_BRANCH}"
+                        echo $MR_STATE
+                        node -v
+                        npm install --registry https://registry.npm.taobao.org
+    				    npm run build
+				    '''
+                }
+            }
+        }
+        stage('打包docker') {
+            steps {
+                script{
+                    sh '''
+                        docker build -t 127.0.0.1:30200/library/${app}:${imageTag} .
+                        
+				    '''
+                }
+            }
+        }
+        stage('上传镜像') {
+            steps {
+                script{
+                    sh '''
+                        docker login --username=admin --password=Harbor12345 127.0.0.1:30200
+                        docker push 127.0.0.1:30200/library/${app}:${imageTag}
+                        sleep 1
+                        docker rmi 127.0.0.1:30200/library/${app}:${imageTag}
+				    '''
+                }
+            }
+        }
+        stage('部署k8s') {
+            steps {
+                script{
+                    sh '''
+                        imageTag=`echo -n ${imageTag}`
+                        cp /var/jenkins_home/k8s/deployment.yaml /var/jenkins_home/k8s/deployment${app}.yaml
+                        mv /var/jenkins_home/k8s/deployment${app}.yaml ./deployment.yaml
+                        sed -i  "s|appName|$app|g" deployment.yaml
+                        sed -i  "s|TAG|$imageTag|g" deployment.yaml
+                        kubectl apply -f  deployment.yaml
+				    '''
+                }
+            }
+        }
+    }
+}
+

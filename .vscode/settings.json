@@ -1,0 +1,33 @@
+{
+  "ego.power-tools": {
+    "values": {
+      "color": "#ffff00"
+    },
+    "commands": {
+      "px2rpx": {
+        "script": "px2rpx.js",
+        "button": {
+          "text": "Click here to start the command."
+        }
+      }
+    },
+    "buttons": [
+      {
+        "color": "#ffff00",
+        "text": "到国际化中文文件",
+        "action": {
+          "type": "script",
+          "script": "./intl2file.js"
+        }
+      },
+      {
+        "color": "#ffff00",
+        "text": "Go to locales-en file",
+        "action": {
+          "type": "script",
+          "script": "./intl2file.js"
+        }
+      }
+    ]
+  }
+}
